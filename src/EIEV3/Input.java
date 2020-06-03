@@ -3,6 +3,9 @@ package EIEV3;
 import java.util.Scanner;
 
 public class Input {
+    private static final String ERROR_MESSAGE = "不適切な入力値が検出されました。数字を入力してください！";
+    private static final String INPUT_ERROR_MESSAGE = "入力値に誤りがあります";
+    private static final String CURRENT_STATE_MSG = "現在以下の長方形がボード上に存在します.";
     private int edge;
     private int coordinate;
     private int selectActionNum;
@@ -25,7 +28,7 @@ public class Input {
         if (board.canParseInt(sc.next())) {
             selectActionNum = board.getInteger();
         } else {
-            System.out.println("不適切な入力値が検出です。数字を入力してください！");
+            System.out.println(ERROR_MESSAGE);
             selectActionNum();
         }
         return selectActionNum;
@@ -45,7 +48,7 @@ public class Input {
                 createEdge(str);
             }
         } else {
-            System.out.println("不適切な入力値が検出されました。数字を入力してください！");
+            System.out.println(ERROR_MESSAGE);
             createEdge(str);
         }
         return edge;
@@ -61,7 +64,7 @@ public class Input {
         if (board.canParseInt(sc.next())) {
             coordinate = board.getInteger();
         } else {
-            System.out.println("不適切な入力値が検出されました。数字を入力してください！");
+            System.out.println(ERROR_MESSAGE);
             xyCoordinate(str);
         }
         return coordinate;
@@ -77,7 +80,7 @@ public class Input {
         if (board.canParseInt(sc.next())) {
             currentCoordinates = board.getInteger();
         } else {
-            System.out.println("不適切な入力値が検出されました。数字を入力してください！");
+            System.out.println(ERROR_MESSAGE);
             movingDistance(str);
         }
         return currentCoordinates;
@@ -93,7 +96,7 @@ public class Input {
                 setColor();
             }
         } else {
-            System.out.println("色の設定で不適切な入力値が検出されました。数字を入力してください！");
+            System.out.println(ERROR_MESSAGE);
             setColor();
         }
         return selectColor;
@@ -113,35 +116,17 @@ public class Input {
                 setMagnification(str);
             }
         } else {
-            System.out.println("不適切な入力値が検出されました。数字を入力してください！");
+            System.out.println(ERROR_MESSAGE);
             setMagnification(str);
         }
         return this.magnification;
 
     }
 
-    // // 長方形を1つ指定するメソッド
-    // public int chooseOne() {
-    // String choose;
-    // System.out.println("現在以下の長方形がボード上に存在します.");
-    // for (int i = 0; i < Board.arrR.size(); i++) {
-    // System.out.print("R" + (i + 1) + " ");
-    // }
-    // System.out.print("\n入力してください(例: R1)->");
-    // choose = sc.next();// 空白まで
-    // try{
-    // getRec = Integer.parseInt(choose.replaceAll("[^0-9]", "")) - 1;
-    // }catch(NumberFormatException e){
-    // System.out.println("入力値に誤りがあります????????");
-    // chooseOne();
-    // }
-    // return getRec;
-    // }
-
     // 長方形を1つ指定するメソッド
     public Rectangle chooseOne() {
         String choose;
-        System.out.println("現在以下の長方形がボード上に存在します.");
+        System.out.println(CURRENT_STATE_MSG);
         for (int i = 0; i < Board.arrR.size(); i++) {
             System.out.print("R" + (i + 1) + " ");
         }
@@ -151,10 +136,10 @@ public class Input {
             getRec = Integer.parseInt(choose.replaceAll("[^0-9]", "")) - 1;
             rec = Board.arrR.get(getRec);
         } catch (NumberFormatException e) {
-            System.out.println("入力値に誤りがあります");
+            System.out.println(INPUT_ERROR_MESSAGE);
             chooseOne();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("入力値に誤りがあります");
+            System.out.println(INPUT_ERROR_MESSAGE);
             chooseOne();
         }
         return rec;
@@ -164,7 +149,7 @@ public class Input {
     public Rectangle chooseTwo(String str) {
         String choose;
         if (str.equals("First")) {
-            System.out.println("現在以下の長方形がボード上に存在します.");
+            System.out.println(CURRENT_STATE_MSG);
             for (int i = 0; i < Board.arrR.size(); i++) {
                 System.out.print("R" + (i + 1) + " ");
             }
@@ -177,10 +162,10 @@ public class Input {
             getRec = Integer.parseInt(choose.replaceAll("[^0-9]", "")) - 1;
             rec = Board.arrR.get(getRec);
         } catch (NumberFormatException e) {
-            System.out.println("入力値に誤りがあります");
+            System.out.println(INPUT_ERROR_MESSAGE);
             chooseTwo(str);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("入力値に誤りがあります");
+            System.out.println(INPUT_ERROR_MESSAGE);
             chooseTwo(str);
         }
         return rec;
